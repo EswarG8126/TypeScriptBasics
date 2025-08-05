@@ -3,68 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive TypeScript Basics Guide</title>
+    <title>Custom TypeScript Lesson</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: "Cool Slate" -->
-    <!-- Application Structure Plan: The application is structured as a vertical, single-page tutorial broken down into logical thematic sections: "Setup", "Core Concepts", "Writing Code", and "Functions & Advanced Types". A sticky top navigation bar allows users to jump to any section, improving on the linear flow of the original document. This thematic grouping helps users focus on related concepts. Interactive elements like copy-to-clipboard buttons and a simulated code editor for the type-safety example are included to make the learning process more active and engaging, which is more effective for a code-along tutorial than a static document. -->
-    <!-- Visualization & Content Choices: The source material is a text-based tutorial. The goal is to teach programming concepts. Therefore, the primary presentation method is styled text and code blocks. Instead of static visualizations, I've chosen interactive components. For code examples (Goal: Inform), I'm using styled `<pre>` blocks with a "Copy" button (Interaction: JS-powered copy). For the "Type Safety" concept (Goal: Demonstrate), I've created a simulated editor with a `<textarea>` that provides real-time feedback (Interaction: JS input validation), which is more impactful than a static image of an error. This approach directly supports the application's goal of being an interactive learning tool. All elements are built with HTML/Tailwind and vanilla JS, confirming NO SVG/Mermaid is used. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: #334155; /* slate-700 */
-        }
-        .code-block {
-            background-color: #1e293b; /* slate-800 */
-            color: #e2e8f0; /* slate-200 */
-            border-radius: 0.5rem;
-            padding: 1rem;
-            position: relative;
-            overflow-x: auto;
-        }
-        .code-block .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background-color: #475569; /* slate-600 */
-            color: #f1f5f9; /* slate-100 */
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background-color 0.2s;
-        }
-        .code-block .copy-btn:hover {
-            background-color: #64748b; /* slate-500 */
-        }
-        .step-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            border: 1px solid #e2e8f0; /* slate-200 */
-        }
-        .nav-link {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            transition: background-color 0.2s, color 0.2s;
-            font-weight: 500;
-        }
-        .nav-link:hover, .nav-link.active {
-            background-color: #e2e8f0; /* slate-200 */
-            color: #0f172a; /* slate-900 */
-        }
-        .slide-callout {
-            background-color: #f1f5f9; /* slate-100 */
-            border-left: 4px solid #64748b; /* slate-500 */
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.25rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
 
@@ -77,6 +18,7 @@
                     <a href="#core-concepts" class="nav-link">Core Concepts</a>
                     <a href="#writing-code" class="nav-link">Writing Code</a>
                     <a href="#functions-types" class="nav-link">Functions & Types</a>
+                    <a href="#project" class="nav-link">Project</a>
                 </div>
             </div>
         </nav>
@@ -85,9 +27,9 @@
     <main class="max-w-4xl mx-auto p-4 md:p-8">
 
         <section id="intro" class="text-center mb-12">
-            <h2 class="text-4xl font-extrabold text-slate-800 mb-4">Code Along: An Interactive Guide</h2>
+            <h2 class="text-4xl font-extrabold text-slate-800 mb-4">Code Along: TypeScript Basics</h2>
             <p class="text-lg text-slate-600">
-                Welcome to your interactive guide to TypeScript! This page translates the original document into a hands-on experience. Follow the steps, copy code easily, and interact with examples to solidify your understanding of TypeScript's fundamentals.
+                Welcome to your interactive guide to TypeScript! Follow the steps, copy code easily, and interact with examples to solidify your understanding of TypeScript's fundamentals.
             </p>
         </section>
 
@@ -103,7 +45,7 @@
             </div>
             <div class="step-card">
                 <h4 class="text-xl font-semibold mb-2">Step 1: Create Your First File</h4>
-                <p class="mb-4">Navigate to your project directory (e.g., Week 4/Day 4) in the command line and create a new file. It's crucial to use the `.ts` extension for TypeScript files.</p>
+                <p class="mb-4">Navigate to your project directory (e.g. Desktop/ASCProjects/week4/day4) in the command line and create a new file. It's crucial to use the `.ts` extension for TypeScript files.</p>
                 <div class="code-block">
                      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                     <pre><code># In your terminal
@@ -117,13 +59,7 @@ touch typescriptBasics.ts</code></pre>
             <p class="text-slate-600 mb-6">This section covers the two most fundamental concepts that make TypeScript powerful: its ability to enforce types and the required compilation step to turn TypeScript code into JavaScript that can be run anywhere.</p>
             <div class="step-card">
                 <h4 class="text-xl font-semibold mb-2">Step 2: Experience Type Safety</h4>
-                <p class="mb-4">TypeScript's main feature is type safety. Let's see it in action. In the editor below, we declare that the `age` variable must be a number. Try to assign a string to it to see the error message appear.</p>
-                <div class="bg-slate-100 p-4 rounded-lg">
-                    <label for="type-safety-editor" class="font-semibold text-slate-700">Interactive Editor:</label>
-                    <textarea id="type-safety-editor" class="w-full h-24 p-2 mt-2 font-mono text-sm bg-white border border-slate-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500" onkeyup="checkTypeSafety(this)"></textarea>
-                    <div id="type-safety-error" class="text-red-600 font-semibold mt-2 h-6"></div>
-                </div>
-                 <p class="mt-4">Here is the code to paste into your `typescriptBasics.ts` file. Your code editor (like VS Code) will show a similar error.</p>
+                <p class="mb-4">TypeScript's main feature is type safety. Let's see it in action. Here is the code to paste into your `typescriptBasics.ts` file. Your code editor (like VS Code) will show a similar error.</p>
                 <div class="code-block mt-2">
                      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                     <pre><code>let age: number;
@@ -223,80 +159,63 @@ console.log("User ID:", userId);</code></pre>
             </div>
         </section>
 
+        <hr class="my-16 border-t-2 border-slate-200">
+
+        <section id="project" class="mb-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-4">Project: TypeScript Fortune Teller</h2>
+                <p class="text-lg text-slate-600">Time to apply what you've learned! This project will guide you through building a simple command-line fortune teller, using all the TypeScript concepts covered in this guide.</p>
+            </div>
+            
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 1: Setup</h4>
+                <p class="mb-4">Create a new file named `fortune.ts` in your project directory.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 2: Your First Typed Function</h4>
+                <p class="mb-4">Create a function named `tellFortune`. It should take no parameters and be explicitly typed to return a `string`. Start with a simple message.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 3: Random Number Helper</h4>
+                <p class="mb-4">Create a function to generate random numbers. It should take a `max` value (a `number`) and return a random `number`.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 4: Create a Fortune Category</h4>
+                <p class="mb-4">Create a function `getFutureCareer` that returns a `string`. Inside, use an array of careers and your random number helper to pick one.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 5: Use a Union Type</h4>
+                <p class="mb-4">Create a function `getLuckyNumber` that can return either a `string` or a `number`. Use a simple `if` statement to create a 50/50 chance of returning a number or a string message.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 6: Putting It All Together</h4>
+                <p class="mb-4">Modify your `tellFortune` function to call your other functions and combine everything into a final fortune. Grab user input from the command line. If the user doesn't provide input, have a default value. Finally, call your main `tellFortune` function and print the result.</p>
+            </div>
+
+            <div class="step-card">
+                <h4 class="text-xl font-semibold mb-2">Step 7: Compile and Run</h4>
+                <p class="mb-4">Open your terminal, compile the TypeScript file, and then run the resulting JavaScript file. Try running it with and without providing an argument!</p>
+                <div class="code-block">
+                     <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Compile the .ts file
+tsc fortune.ts
+
+# Run the .js file with an argument
+node fortune.js "a new puppy"</code></pre>
+                </div>
+            </div>
+
+        </section>
+
     </main>
 
-    <script>
-        function copyCode(button) {
-            const pre = button.nextElementSibling;
-            const code = pre.innerText;
-            
-            const textArea = document.createElement('textarea');
-            textArea.value = code;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                button.innerText = 'Copied!';
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-                button.innerText = 'Failed!';
-            }
-
-            document.body.removeChild(textArea);
-
-            setTimeout(() => {
-                button.innerText = 'Copy';
-            }, 2000);
-        }
-
-        function checkTypeSafety(textarea) {
-            const code = textarea.value;
-            const errorDiv = document.getElementById('type-safety-error');
-            
-            const ageAssignmentRegex = /age\s*=\s*(.*);?/;
-            const match = code.match(ageAssignmentRegex);
-            
-            if (match && match[1]) {
-                const value = match[1].trim();
-                if (value.startsWith('"') || value.startsWith("'") || value.startsWith("`")) {
-                    errorDiv.innerText = "Error: Type 'string' is not assignable to type 'number'.";
-                } else if (!isNaN(parseFloat(value)) && isFinite(value)) {
-                     errorDiv.innerText = "";
-                } else {
-                    errorDiv.innerText = "Error: Invalid assignment.";
-                }
-            } else {
-                errorDiv.innerText = "";
-            }
-        }
-        
-        const initialEditorText = `let age: number;\nage = 30;\n`;
-        document.getElementById('type-safety-editor').value = initialEditorText;
-
-
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            // Adjust for intro section which isn't in nav
-            if (current === 'intro') current = 'setup';
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
